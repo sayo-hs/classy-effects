@@ -68,6 +68,7 @@ library
         Control.Effect.Class,
         Control.Effect.Class.Machinery.HFunctor,
         Control.Effect.Class.Machinery.TH,
+        Control.Effect.Class.Machinery.Context,
         Data.Effect.Class.TH,
         Data.Effect.Class.TH.HFunctor,
 
