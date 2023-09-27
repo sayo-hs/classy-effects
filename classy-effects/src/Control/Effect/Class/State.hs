@@ -13,6 +13,15 @@ Portability :  portable
 -}
 module Control.Effect.Class.State where
 
+import Control.Effect.Class.Machinery.Context (
+    Context,
+    ContextType (FunctorialContext, ImplicitContext),
+    ContextTypeOf,
+    ExtensibleFunctorialContext (applyContextEx, injectContext),
+    FunctorialContext (applyContext),
+    ImplicitContext (fetchContext),
+ )
+
 class State s f where
     get :: f s
     put :: s -> f ()
@@ -24,3 +33,29 @@ gets f = f <$> get
 
 modify :: (State s m, Monad m) => (s -> s) -> m ()
 modify f = put . f =<< get
+
+data PutCtx
+type instance ContextTypeOf PutCtx = 'FunctorialContext
+instance (State s m, Monad m) => FunctorialContext PutCtx ((,) s) m where
+    applyContext m = do
+        (s, a) <- m
+        put s
+        pure a
+    {-# INLINE applyContext #-}
+instance (State s m, Monad m) => ExtensibleFunctorialContext PutCtx (,) m s a (m ()) where
+    injectContext = put
+    {-# INLINE injectContext #-}
+
+    applyContextEx m = do
+        (put_, a) <- m
+        put_
+        pure a
+    {-# INLINE applyContextEx #-}
+type PUT a = Context PutCtx a
+
+data GetCtx
+type instance ContextTypeOf GetCtx = 'ImplicitContext
+instance (State s m, Monad m) => ImplicitContext GetCtx s m where
+    fetchContext = (=<< get)
+    {-# INLINE fetchContext #-}
+type GET a = Context GetCtx a

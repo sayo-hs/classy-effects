@@ -10,6 +10,11 @@ License     :  MPL-2.0 (see the file LICENSE)
 Maintainer  :  ymdfield@outlook.jp
 Stability   :  experimental
 Portability :  portable
+
+Enable localized effect handling.
+
+For example, for an interface like @a -> f (Either e b)@, expand @Either e a@ as a @Throw@ effect to
+@f@, automatically generating @Throw e f => a -> f b@ from @a -> f (Either e b)@.
 -}
 module Control.Effect.Class.Machinery.Context where
 
@@ -30,8 +35,8 @@ Reflect the /functorial context/ @ctx@ into the carrier @f@, using the Boehm-Ber
 extensibility.
 -}
 class
-    FunctorialContext cTag (ctx r) f =>
-    ExtensibleFunctorialContext cTag ctx (f :: Type -> Type) a o r
+    FunctorialContext cTag (ctx o) f =>
+    ExtensibleFunctorialContext cTag ctx (f :: Type -> Type) o a r
         | cTag ctx f a -> r
     where
     -- | Inject the output value @o@ into the extensible final type @r@.

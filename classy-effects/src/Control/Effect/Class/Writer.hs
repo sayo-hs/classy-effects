@@ -13,6 +13,14 @@ Portability :  portable
 -}
 module Control.Effect.Class.Writer where
 
+import Control.Effect.Class.Machinery.Context (
+    Context,
+    ContextType (FunctorialContext),
+    ContextTypeOf,
+    ExtensibleFunctorialContext (applyContextEx, injectContext),
+    FunctorialContext (applyContext),
+ )
+
 class Monoid w => Tell w f where
     tell :: w -> f ()
 
@@ -21,3 +29,26 @@ class Monoid w => WriterH w f where
     censor :: (w -> w) -> f a -> f a
 
 makeEffect "Writer" ''Tell ''WriterH
+
+data WriteCtx
+
+type instance ContextTypeOf WriteCtx = 'FunctorialContext
+
+instance (Writer w m, Monad m) => FunctorialContext WriteCtx ((,) w) m where
+    applyContext m = do
+        (w, a) <- m
+        tell w
+        pure a
+    {-# INLINE applyContext #-}
+
+instance (Writer w m, Monad m) => ExtensibleFunctorialContext WriteCtx (,) m w a (m ()) where
+    injectContext = tell
+    {-# INLINE injectContext #-}
+
+    applyContextEx m = do
+        (tell_, a) <- m
+        tell_
+        pure a
+    {-# INLINE applyContextEx #-}
+
+type WRITE a = Context WriteCtx a

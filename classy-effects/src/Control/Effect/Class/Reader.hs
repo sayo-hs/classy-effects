@@ -13,6 +13,13 @@ Portability :  portable
 -}
 module Control.Effect.Class.Reader where
 
+import Control.Effect.Class.Machinery.Context (
+    Context,
+    ContextType (ImplicitContext),
+    ContextTypeOf,
+    ImplicitContext (fetchContext),
+ )
+
 class Ask (r :: Type) f where
     ask :: f r
 
@@ -23,3 +30,13 @@ makeEffect "Reader" ''Ask ''Local
 
 asks :: (Ask r f, Functor f) => (r -> a) -> f a
 asks f = f <$> ask
+
+data ReadCtx
+
+type instance ContextTypeOf ReadCtx = 'ImplicitContext
+
+instance (Reader r m, Monad m) => ImplicitContext ReadCtx r m where
+    fetchContext = (=<< ask)
+    {-# INLINE fetchContext #-}
+
+type READ a = Context ReadCtx a

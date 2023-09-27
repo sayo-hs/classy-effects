@@ -7,6 +7,14 @@
 
 module Control.Effect.Class.Chronicle where
 
+import Control.Effect.Class.Machinery.Context (
+    Context,
+    ContextType (FunctorialContext),
+    ContextTypeOf,
+    ExtensibleFunctorialContext (applyContextEx, injectContext),
+    FunctorialContext (applyContext),
+ )
+
 import Data.Functor (($>))
 import Data.These (These (That, These, This))
 
@@ -26,3 +34,27 @@ chronicle = \case
     This c -> confess c
     That x -> pure x
     These c x -> dictate c $> x
+
+data ChronicleCtx
+
+type instance ContextTypeOf ChronicleCtx = 'FunctorialContext
+
+instance (ChronicleF c m, Monad m) => FunctorialContext ChronicleCtx (These c) m where
+    applyContext = (>>= chronicle)
+    {-# INLINE applyContext #-}
+
+instance
+    (ChronicleF c m, Monad m) =>
+    ExtensibleFunctorialContext ChronicleCtx These m c a (m a, m ())
+    where
+    injectContext c = (confess c, dictate c)
+    {-# INLINE injectContext #-}
+
+    applyContextEx m =
+        m >>= \case
+            This (confess_, _) -> confess_
+            That x -> pure x
+            These (_, dictate_) x -> dictate_ $> x
+    {-# INLINE applyContextEx #-}
+
+type CHR a = Context ChronicleCtx a
