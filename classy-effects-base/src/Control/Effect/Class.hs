@@ -19,9 +19,13 @@ This module provides the essential definitions required for CEPs compliance, for
 of classy-effects.
 Please refer to [CEPs](https://github.com/sayo-hs/classy-effects/blob/master/CEPs/README.md) for details.
 -}
-module Control.Effect.Class where
+module Control.Effect.Class (
+    module Control.Effect.Class,
+    module Control.Effect.Class.Machinery.Context,
+) where
 
 import Control.Applicative (Alternative)
+import Control.Effect.Class.Machinery.Context
 import Control.Effect.Class.Machinery.HFunctor (HFunctor, hfmap)
 import Control.Monad (MonadPlus)
 import Control.Monad.Except (MonadError)
