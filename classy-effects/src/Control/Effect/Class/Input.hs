@@ -17,7 +17,24 @@ in the @polysemy@ package.
 -}
 module Control.Effect.Class.Input where
 
+import Control.Effect.Class.Machinery.Context (
+    Context,
+    ContextType (ImplicitContext),
+    ContextTypeOf,
+    ImplicitContext (fetchContext),
+ )
+
 class Input i (f :: Type -> Type) where
     input :: f i
 
 makeEffectF ''Input
+
+data InputCtx
+
+type instance ContextTypeOf InputCtx = 'ImplicitContext
+
+instance (Input i m, Monad m) => ImplicitContext InputCtx i m where
+    fetchContext = (=<< input)
+    {-# INLINE fetchContext #-}
+
+type IN a = Context InputCtx a

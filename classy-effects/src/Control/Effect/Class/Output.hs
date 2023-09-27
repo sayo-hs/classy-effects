@@ -17,7 +17,38 @@ in the @polysemy@ package.
 -}
 module Control.Effect.Class.Output where
 
+import Control.Effect.Class.Machinery.Context (
+    Context,
+    ContextType (FunctorialContext),
+    ContextTypeOf,
+    ExtensibleFunctorialContext (applyContextEx, injectContext),
+    FunctorialContext (applyContext),
+ )
+
 class Output o f where
     output :: o -> f ()
 
 makeEffectF ''Output
+
+data OutputCtx
+
+type instance ContextTypeOf OutputCtx = 'FunctorialContext
+
+instance (Output o m, Monad m) => FunctorialContext OutputCtx ((,) o) m where
+    applyContext m = do
+        (o, a) <- m
+        output o
+        pure a
+    {-# INLINE applyContext #-}
+
+instance (Output o m, Monad m) => ExtensibleFunctorialContext OutputCtx (,) m o a (m ()) where
+    injectContext = output
+    {-# INLINE injectContext #-}
+
+    applyContextEx m = do
+        (output_, a) <- m
+        output_
+        pure a
+    {-# INLINE applyContextEx #-}
+
+type OUT a = Context OutputCtx a
