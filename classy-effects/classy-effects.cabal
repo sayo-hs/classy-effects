@@ -70,6 +70,7 @@ library
         Control.Effect.Class.Machinery.HFunctor,
         Control.Effect.Class.Machinery.TH,
         Control.Effect.Class.Machinery.Context,
+        Control.Effect.Class.Machinery.TH.Send,
         Data.Effect.Class.TH,
         Data.Effect.Class.TH.HFunctor,
 
