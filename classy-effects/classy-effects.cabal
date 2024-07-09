@@ -1,6 +1,6 @@
 cabal-version:      2.4
 name:               classy-effects
-version:            0.1.0.0
+version:            0.1.0.1
 
 -- A short (one-line) description of the package.
 synopsis: An interface for a handler-independent, typeclass-based effect system.
@@ -11,15 +11,20 @@ description:
     the definition of effects in Haskell in a backend-library-agnostic manner. It also includes
     several standard effect definitions defined in compliance with CEPs, and Template Haskell
     functions to automatically make type classes conform to CEPs as effect classes.
-
+    .
     Please refer
     to [CEPs](https://github.com/sayo-hs/classy-effects/blob/master/CEPs/README.md) for details.
-
+    .
     The Template Haskell functions are re-exported
     from the [classy-effects-th](https://hackage.haskell.org/package/classy-effects-th) package,
     while the fundamental definitions are re-exported
     from the [classy-effects-base](https://hackage.haskell.org/package/classy-effects-base)
     package.
+    .
+    __This 'classy-effects' project was abandoned due to the discovery of fundamental difficulties.__
+    The reasons are as follows: <https://github.com/orgs/sayo-hs/projects/4?pane=issue&itemId=48547880>
+    __As an alternative, consider using 'sayo-hs/data-effects', a GADTs-based common effect representation foundation:__
+    <https://github.com/sayo-hs/data-effects>.
 
 -- A URL where users can report bugs.
 bug-reports: https://github.com/sayo-hs/classy-effects

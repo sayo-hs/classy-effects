@@ -1,6 +1,6 @@
 cabal-version:      2.4
 name:               classy-effects-th
-version:            0.1.0.0
+version:            0.1.0.1
 
 -- A short (one-line) description of the package.
 synopsis: Automatic compliance with the classy-effects protocols
@@ -9,13 +9,18 @@ synopsis: Automatic compliance with the classy-effects protocols
 description:
     This package provides Template Haskell functions that enable automatic compliance with CEPs
     (classy-effects protocols), offering a unified framework for defining effects in Haskell.
-
+    .
     CEPs aim to standardize and unify the definition of effects in Haskell in a
     backend-library-agnostic manner. Please refer
     to [CEPs](https://github.com/sayo-hs/classy-effects/blob/master/CEPs/README.md) for details.
-
+    .
     Please also refer to the [classy-effects](https://hackage.haskell.org/package/classy-effects)
     package, which offers standard effect definitions compliant with CEPs.
+    .
+    __This 'classy-effects' project was abandoned due to the discovery of fundamental difficulties.__
+    The reasons are as follows: <https://github.com/orgs/sayo-hs/projects/4?pane=issue&itemId=48547880>
+    __As an alternative, consider using 'sayo-hs/data-effects', a GADTs-based common effect representation foundation:__
+    <https://github.com/sayo-hs/data-effects>.
 
 -- A URL where users can report bugs.
 bug-reports: https://github.com/sayo-hs/classy-effects

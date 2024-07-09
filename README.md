@@ -1,7 +1,7 @@
 # Status (2024) : **This `classy-effects` project was abandoned due to the discovery of fundamental difficulties.**
 The reasons are as follows: https://github.com/orgs/sayo-hs/projects/4?pane=issue&itemId=48547880
 
-As an alternative, consider using `sayo-hs/data-effects`, a GADTs-based common effect representation foundation: https://github.com/sayo-hs/data-effects
+**As an alternative, consider using `sayo-hs/data-effects`, a GADTs-based common effect representation foundation:** https://github.com/sayo-hs/data-effects
 
 # classy-effects
 
