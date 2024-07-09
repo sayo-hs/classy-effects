@@ -1,4 +1,13 @@
+# Status (2024) : **This `classy-effects` project was abandoned due to the discovery of fundamental difficulties.**
+The reasons are as follows: https://github.com/orgs/sayo-hs/projects/4?pane=issue&itemId=48547880
+
+As an alternative, consider using `sayo-hs/data-effects`, a GADTs-based common effect representation foundation: https://github.com/sayo-hs/data-effects
+
 # classy-effects
+
+[![Hackage](https://img.shields.io/hackage/v/classy-effects.svg?logo=haskell&label=classy-effects)](https://hackage.haskell.org/package/classy-effects)
+[![Hackage](https://img.shields.io/hackage/v/classy-effects-th.svg?logo=haskell&label=classy-effects-th)](https://hackage.haskell.org/package/classy-effects-th)
+[![Hackage](https://img.shields.io/hackage/v/classy-effects-base.svg?logo=haskell&label=classy-effects-base)](https://hackage.haskell.org/package/classy-effects-base)
 
 This repository is for **CEPs** and its associated Haskell library.
 
@@ -23,3 +32,21 @@ Examples of using classy-effects combined with the Heftia effect handler backend
 
 ## Your contributions are welcome!
 Please see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Credits
+Parts of this project have been adapted or inspired by the following resources:
+
+* **[Hefty Algebras -- The Artifact](https://github.com/heft-lang/POPL2023)**
+    * **Copyright** (c) 2023 Casper Bach Poulsen and Cas van der Rest
+    * **License**: MIT
+    * **Modifications**: The inspiration for the idea of Heftia. Code was used in the definition of [`LiftIns`](https://github.com/sayo-hs/classy-effects/blob/5b6ccb1f2bcfef804692bc13996e060bd0739475/classy-effects-base/src/Control/Effect/Class.hs#L49).
+
+* **[effet](https://github.com/typedbyte/effet)**
+    * **Copyright** (c) 2020 Michael Szvetits
+    * **License**: BSD-3-Clause
+    * **Modifications**: Used TemplateHaskell code to handle the effect type class.
+
+* **[compdata](https://github.com/pa-ba/compdata)**
+    * **Copyright** (c) 2010--2011 Patrick Bahr, Tom Hvitved
+    * **License**: BSD-3-Clause
+    * **Modifications**: Used TemplateHaskell code to derive instances of the `HFunctor` type class.
