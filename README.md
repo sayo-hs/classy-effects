@@ -1,6 +1,9 @@
-# classy-effects
+# Status (2024) : **This `classy-effects` project was abandoned due to the discovery of fundamental difficulties.**
+The reasons are as follows: https://github.com/orgs/sayo-hs/projects/4?pane=issue&itemId=48547880
 
-**This project was abandoned due to the discovery of fundamental issues.**
+As an alternative, consider using `sayo-hs/data-effects`, a GADTs-based common effect representation foundation: https://github.com/sayo-hs/data-effects
+
+# classy-effects
 
 [![Hackage](https://img.shields.io/hackage/v/classy-effects.svg?logo=haskell&label=classy-effects)](https://hackage.haskell.org/package/classy-effects)
 [![Hackage](https://img.shields.io/hackage/v/classy-effects-th.svg?logo=haskell&label=classy-effects-th)](https://hackage.haskell.org/package/classy-effects-th)
